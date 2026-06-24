@@ -1,0 +1,557 @@
+import type { StatValueDefinition } from "./types";
+
+export const SPEED_SCALE = [
+  ["Immobile", "NONE"],
+  ["Below Average", "Sub-Human"],
+  ["Average Human", "Human"],
+  ["Athletic", "High Human"],
+  ["Peak Human", "Peak Human"],
+  ["Superhuman", "Superhuman"],
+  ["Subsonic", "Structural"],
+  ["Subsonic+", "Town"],
+  ["Transonic", "City"],
+  ["Supersonic", "Metropole"],
+  ["Supersonic+", "Regional"],
+  ["Hypersonic", "National"],
+  ["Hypersonic+", "Continental"],
+  ["Sub-Relativistic", "Lunar"],
+  ["Relativistic", "Planetary"],
+  ["Relativistic+", "Giant Planetary"],
+  ["Speed of Light", "Star"],
+  ["FTL", "Star System"],
+  ["FTL+", "Star Cluster"],
+  ["Massively FTL", "Supercluster"],
+  ["Massively FTL+", "Observable Universe"],
+  ["Infinite Speed", "Universal"],
+  ["Immeasurable Speed", "UNKNOWN"],
+  ["Irrelevant Speed", "Omniversal"],
+  ["Nigh-Omnipresent", "Archetypal"],
+  ["Omnipresent", "Narrative Transcendent"],
+  ["Absolute Omnipresent", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const REACTION_SCALE = [
+  ["No Equilibrium", "NONE"],
+  ["Delayed", "Sub-Human"],
+  ["Gradual", "Human"],
+  ["Reactive", "Superhuman"],
+  ["Ultra-fast Burst", "Regional"],
+  ["Near-Instant", "Planetary"],
+  ["Instant", "Galaxy"],
+  ["Infinite", "Universal"],
+  ["Precognition", "Complex Universal"],
+  ["Total Precognition", "Multiversal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Irrelevance", "Archetypal"],
+  ["Omniscient Precognition", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const ACCELERATION_SCALE = [
+  ["No Equilibrium", "NONE"],
+  ["Delayed", "Sub-Human"],
+  ["Gradual", "Human"],
+  ["Reactive", "Superhuman"],
+  ["Ultra-fast Burst", "Regional"],
+  ["Near-Instant", "Planetary"],
+  ["Instant", "Galaxy"],
+  ["Infinite Acceleration", "Universal"],
+  ["Immeasurable Acceleration", "UNKNOWN"],
+  ["Irrelevant Acceleration", "Archetypal"],
+  ["Inapplicable Acceleration", "Narrative Transcendent"],
+  ["Beyond narrative acceleration", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const ACTIVATION_SPEED_SCALE = [
+  ["Delayed", "Sub-Human"],
+  ["Slow", "Human"],
+  ["Moderate", "High Human"],
+  ["Fast", "Peak Human"],
+  ["Very Fast", "Superhuman"],
+  ["Superfast", "Structural"],
+  ["Hyperfast", "Regional"],
+  ["Ultrafast", "Planetary"],
+  ["Cosmic scaling", "UNKNOWN"],
+  ["Near-Instant", "Observable Universe"],
+  ["Instant", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Constant", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const INTELLIGENCE_SCALE = [
+  ["Mindless", "NONE"],
+  ["Sub-Sentient", "UNKNOWN"],
+  ["Sentient", "Sub-Human"],
+  ["Below Average", "Low Human"],
+  ["Average", "Human"],
+  ["Above Average", "High Human"],
+  ["Gifted", "Low Peak Human"],
+  ["Genius", "Peak Human"],
+  ["Super-Genius", "Superhuman"],
+  ["Transcendent Genius", "Universal"],
+  ["Intellectual Archetype", "UNKNOWN"],
+  ["Nigh Omniscient", "Archetypal"],
+  ["Omniscient", "Narrative Transcendent"],
+  ["True Omniscient", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const ENDURANCE_SCALE = [
+  ["Insubstantial", "NONE"],
+  ["Fragile", "Sub-Human"],
+  ["Human", "Human"],
+  ["Peak", "Peak Human"],
+  ["Superhuman", "Superhuman"],
+  ["Extreme", "Structural"],
+  ["Monstruous", "Regional"],
+  ["Catastrophic", "Planetary"],
+  ["Indomitable", "Star"],
+  ["Cosmic", "Galaxy Cluster"],
+  ["Near-Infinite", "Observable Universe"],
+  ["Infinite", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Irrelevant", "Archetypal"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const STAMINA_SCALE = [
+  ["Insubstantial", "NONE"],
+  ["Weak", "Sub-Human"],
+  ["Average", "Human"],
+  ["High", "Peak Human"],
+  ["Superhuman", "Superhuman"],
+  ["Abnormal", "Structural"],
+  ["Massive", "Regional"],
+  ["Super Massive", "Planetary"],
+  ["Colossal", "Star"],
+  ["Cosmic", "Star → Galaxy Cluster"],
+  ["Near-Infinite", "Observable Universe"],
+  ["Infinite", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Irrelevant", "Archetypal"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const BODY_CONSTITUTION_SCALE = [
+  ["Organic", "UNKNOWN"],
+  ["Inorganic", "UNKNOWN"],
+  ["Semi-Organic", "UNKNOWN"],
+  ["Virtual", "UNKNOWN"],
+  ["Exotic", "UNKNOWN"],
+  ["Energy-Based", "UNKNOWN"],
+  ["Divine", "UNKNOWN"],
+  ["Conceptual", "UNKNOWN"],
+  ["Dimensional", "UNKNOWN"],
+  ["Non-Existence", "UNKNOWN"],
+  ["Perfect", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const BODY_CONTROL_SCALE = [
+  ["Inexistent", "NONE"],
+  ["Paralysis", "UNKNOWN"],
+  ["Coordination Impairment", "UNKNOWN"],
+  ["Balanced", "UNKNOWN"],
+  ["Coordination", "UNKNOWN"],
+  ["Advanced Coordination", "UNKNOWN"],
+  ["Proprioception", "UNKNOWN"],
+  ["Near-Supremacy", "UNKNOWN"],
+  ["Supremacy", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const PERCEPTION_AWARENESS_SCALE = [
+  ["Oblivious", "NONE"],
+  ["Dim", "Sub-Human"],
+  ["Average", "Human"],
+  ["Perceptive", "High Human"],
+  ["Super-Perceptive", "Peak Human"],
+  ["Hyper-Perceptive", "High Peak Human"],
+  ["Enhanced Awareness", "Superhuman"],
+  ["Advanced Awareness", "Regional"],
+  ["Extreme Awareness", "Planetary"],
+  ["Cosmic Awareness", "UNKNOWN"],
+  ["Near Universal Awareness", "Observable Universe"],
+  ["Universal Awareness", "Universal"],
+  ["Complex Universal Awareness", "Complex Universal"],
+  ["Multiversal Awareness", "Multiversal"],
+  ["Immeasurable Awareness", "UNKNOWN"],
+  ["Infinite Consciousness", "Archetypal"],
+  ["Omniscient Awareness", "Narrative Transcendent"],
+  ["Absolute Awareness", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const SENSORY_ACCURACY_SCALE = [
+  ["0% — Null Clarity", "NONE"],
+  ["10% — Distorted Clarity", "Sub-Human"],
+  ["25% — Fragmented Clarity", "High Sub-Human"],
+  ["50% — Approximate Clarity", "Low Human"],
+  ["75% — Clear Clarity", "Human"],
+  ["90% — High Clarity", "UNKNOWN"],
+  ["100% — Perfect Clarity (3D)", "Universal"],
+  ["Complex Universal Clarity (4D)", "Complex Universal"],
+  ["Multiversal Clarity (5D)", "Multiversal"],
+  ["Immeasurable Clarity (6D+)", "UNKNOWN"],
+  ["Near total Clarity", "Low Omniversal"],
+  ["Total Clarity", "Omniversal"],
+  ["Narrative Clarity", "Narrative Transcendent"],
+  ["Absolute Clarity", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const LEARNING_SPEED_SCALE = [
+  ["Stagnant", "NONE"],
+  ["Low", "Sub-Human"],
+  ["Basic", "Human"],
+  ["High", "Peak Human"],
+  ["Rapid", "Superhuman"],
+  ["Superrapid", "Structural"],
+  ["Hyperrapid", "Regional"],
+  ["Ultrarapid", "Planetary"],
+  ["Cosmological", "UNKNOWN"],
+  ["Near-Infinite", "Observable Universe"],
+  ["Infinite", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Instantaneous", "Omniversal"],
+  ["Irrelevancy", "Archetypal"],
+  ["Near NTL (Nothing to learn)", "Narrative Transcendent"],
+  ["NTL", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const WILLPOWER_SCALE = [
+  ["Avolition", "NONE"],
+  ["Weak-Minded", "Low Human"],
+  ["Resolved", "Human"],
+  ["Tenacity", "High Human"],
+  ["Strong-Willed", "Peak Human"],
+  ["Iron Will", "Superhuman"],
+  ["Unbreakable", "UNKNOWN"],
+  ["Absolute Resolve", "UNKNOWN"],
+  ["Near Self-Mastery", "Observable Universe"],
+  ["Self-Mastery", "Universal"],
+  ["Ascendent Will", "Complex Universal"],
+  ["Transcendent Will", "UNKNOWN"],
+  ["Near Indomitable Will", "Archetypal"],
+  ["Indomitable Will", "Narrative Transcendent"],
+  ["Absolute Will", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const EMOTIONAL_CONTROL_SCALE = [
+  ["Total Disorder", "NONE"],
+  ["Severe Disorder", "Sub-Human"],
+  ["Disorder", "Low Human"],
+  ["Basic Control", "Human"],
+  ["Self-Regulation", "High Human"],
+  ["Measured", "Peak Human"],
+  ["Composed", "Superhuman"],
+  ["Imperturbable", "UNKNOWN"],
+  ["Emotional Sovereignty", "Universal"],
+  ["Transcendent Regulation", "Narrative Transcendent"],
+  ["Absolute Regulation", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const LEADERSHIP_SCALE = [
+  ["Repellent", "UNKNOWN"],
+  ["Forgettable", "UNKNOWN"],
+  ["Ordinary", "UNKNOWN"],
+  ["Likable", "UNKNOWN"],
+  ["Influential", "UNKNOWN"],
+  ["Commanding", "UNKNOWN"],
+  ["Magnetic", "UNKNOWN"],
+  ["Legendary Presence", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const CHARM_SCALE = [
+  ["Off-Putting", "UNKNOWN"],
+  ["Awkward", "UNKNOWN"],
+  ["Ordinary", "UNKNOWN"],
+  ["Pleasant", "UNKNOWN"],
+  ["Persuasive", "UNKNOWN"],
+  ["Captivating", "UNKNOWN"],
+  ["Irresistible", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const DEXTERITY_SCALE = [
+  ["Total Ineptitude", "NONE"],
+  ["Poor", "Sub-Human"],
+  ["Average", "Human"],
+  ["Skilled", "High Human"],
+  ["Expert", "Peak Human"],
+  ["Masterful", "High Peak Human"],
+  ["Elite Master", "Low Superhuman"],
+  ["Absolute Skill", "UNKNOWN"],
+  ["Universal Mastery", "Universal"],
+  ["Multiversal Mastery", "Multiversal"],
+  ["Transcendent Mastery", "UNKNOWN"],
+  ["Near Total Mastery", "Low Omniversal"],
+  ["Total Mastery", "Omniversal"],
+  ["Perfection", "Archetypal"],
+  ["Irrelevancy", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const ACCURACY_SCALE = [
+  ["Imprecision", "NONE"],
+  ["Inexact", "Sub-Human"],
+  ["Average", "Human"],
+  ["Meticulous", "High Human"],
+  ["High Precision", "Peak Human"],
+  ["Ultra-Precise", "High Peak Human"],
+  ["Extreme Precision", "Superhuman"],
+  ["Cosmic Precision", "UNKNOWN"],
+  ["Absolute Precision (3D Limit)", "Observable Universe"],
+  ["Near-Exactitude", "Low Universal"],
+  ["Exactitude", "Universal"],
+  ["Total Exactitude", "Complex Universal"],
+  ["Multi-Layered Precision", "UNKNOWN"],
+  ["Near-Perfection", "Low Omniversal"],
+  ["Perfection", "Archetypal"],
+  ["True Perfection", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const COMBAT_SKILLS_SCALE = [
+  ["Total Incompetence", "NONE"],
+  ["Incompetent", "Sub-Human"],
+  ["Non-Combatant", "Human"],
+  ["Combat Prowess", "High Human"],
+  ["Skilled", "Low Peak Human"],
+  ["Expert", "Peak Human"],
+  ["Master Fighter", "High Peak Human"],
+  ["Genius / Gifted", "Low Superhuman"],
+  ["Super-Genius", "UNKNOWN"],
+  ["Universal Skilled", "Universal"],
+  ["Immeasurable Mastery", "UNKNOWN"],
+  ["Transcendent Combatant", "Archetypal"],
+  ["Near-irrelevant", "Narrative Transcendent"],
+  ["Irrelevant", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const DEFENSIVE_CAPABILITIES_SCALE = [
+  ["Defenseless", "NONE"],
+  ["Vulnerable", "Low Human"],
+  ["Decent", "Human"],
+  ["Trained Defense", "High Human"],
+  ["Skilled Defense", "Low Peak Human"],
+  ["Advanced Defense", "Peak Human"],
+  ["Expert Defense", "High Peak Human"],
+  ["Master Defense", "Low Superhuman"],
+  ["Defensive Genius", "Superhuman"],
+  ["Cosmic Defense", "UNKNOWN"],
+  ["Universal Defense", "Universal"],
+  ["Immeasurable Defense", "UNKNOWN"],
+  ["Irrelevant Defense", "Omniversal"],
+  ["Inapplicable Defense", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const VERSATILITY_SCALE = [
+  ["Rigid", "Sub-Human"],
+  ["Limited", "Low Human"],
+  ["Basic", "Human"],
+  ["Flexible", "High Human"],
+  ["Adaptive", "Peak Human"],
+  ["Highly Adaptive", "Superhuman"],
+  ["Dynamic", "Structural"],
+  ["Strategic", "Regional"],
+  ["Genius Adaptation", "UNKNOWN"],
+  ["Universal Versatility", "Universal"],
+  ["Immeasurable Versatility", "UNKNOWN"],
+  ["Perfect versatility", "Archetypal"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const SYNERGY_SCALE = [
+  ["Disjointed", "UNKNOWN"],
+  ["Loose", "UNKNOWN"],
+  ["Functional", "UNKNOWN"],
+  ["Coordinated", "UNKNOWN"],
+  ["Integrated", "UNKNOWN"],
+  ["Highly Integrated", "UNKNOWN"],
+  ["Seamless", "UNKNOWN"],
+  ["Perfectly Chained", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const GROWTH_SPEED_SCALE = [
+  ["Stagnant", "NONE"],
+  ["Low", "Low Human"],
+  ["Basic", "Human"],
+  ["High", "Superhuman"],
+  ["Rapid", "Regional"],
+  ["Superrapid", "Planetary"],
+  ["Hyperrapid", "Star"],
+  ["Ultrarapid", "UNKNOWN"],
+  ["Cosmological", "Observable Universe"],
+  ["Infinite", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Instantaneous", "Archetypal"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Absolute irrelevancy", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const POWER_MASTERY_SCALE = [
+  ["Inept", "UNKNOWN"],
+  ["Initiate", "UNKNOWN"],
+  ["Practitioner", "UNKNOWN"],
+  ["Skilled User", "UNKNOWN"],
+  ["Expert User", "UNKNOWN"],
+  ["Master User", "UNKNOWN"],
+  ["Gifted / Genius User", "UNKNOWN"],
+  ["Supreme User", "UNKNOWN"],
+  ["Transcendent Mastery", "UNKNOWN"],
+  ["Immeasurable Mastery", "UNKNOWN"],
+  ["Conceptual possibilities", "UNKNOWN"],
+  ["Absolute possibilities", "Narrative Transcendent"],
+  ["Power omnipotence", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const POWER_CAPABILITIES_SCALE = [
+  ["Body Alteration", "UNKNOWN"],
+  ["External Manipulation", "UNKNOWN"],
+  ["Mental & Perceptual Powers", "UNKNOWN"],
+  ["Spiritual & Soul Powers", "UNKNOWN"],
+  ["Creation & Summoning", "UNKNOWN"],
+  ["Conceptual & Abstract Powers", "UNKNOWN"],
+  ["Metapower", "UNKNOWN"],
+  ["Narrative manipulation", "Narrative Transcendent"],
+  ["Dimensional & Movement Powers", "UNKNOWN"],
+  ["Defense & Negation", "UNKNOWN"],
+  ["Utility & Support", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const POWER_RESERVES_SCALE = [
+  ["Empty", "NONE"],
+  ["External", "UNKNOWN"],
+  ["Low reserve", "UNKNOWN"],
+  ["Medium reserve", "UNKNOWN"],
+  ["Large reserve", "UNKNOWN"],
+  ["Immense reserve", "UNKNOWN"],
+  ["Limitless reserve", "Universal"],
+  ["Immeasurable reserve", "UNKNOWN"],
+  ["Inapplicable reserve", "Narrative Transcendent"],
+  ["Omnipotent reserve", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const POWER_RECOVERY_SCALE = [
+  ["Irrecoverable", "NONE"],
+  ["Creeping", "UNKNOWN"],
+  ["Sluggish", "Low Sub-Human"],
+  ["Very Slow", "Sub-Human"],
+  ["Slow", "High Sub-Human"],
+  ["Below Average", "Low Human"],
+  ["Average", "Human"],
+  ["Fast", "Peak Human"],
+  ["Superfast", "Superhuman"],
+  ["Hyperfast", "UNKNOWN"],
+  ["Ultrafast", "UNKNOWN"],
+  ["Near-Instant", "Observable Universe"],
+  ["Instant", "Universal"],
+  ["Immeasurable", "UNKNOWN"],
+  ["Irrelevant", "Archetypal"],
+  ["Inapplicable", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const POWER_EFFICIENCY_SCALE = [
+  ["Inefficient", "NONE"],
+  ["Wasteful", "UNKNOWN"],
+  ["Basic Efficiency", "UNKNOWN"],
+  ["Controlled", "UNKNOWN"],
+  ["Efficient", "UNKNOWN"],
+  ["Highly Efficient", "UNKNOWN"],
+  ["Optimized", "UNKNOWN"],
+  ["Peak Efficiency", "UNKNOWN"],
+  ["Perfect Efficiency", "UNKNOWN"],
+  ["Immeasurable Efficiency", "UNKNOWN"],
+  ["Pinnacle", "UNKNOWN"],
+  ["Narrative Supremacy", "Narrative Transcendent"],
+  ["Absolute Supremacy", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const ONTOLOGICAL_LEVEL_SCALE = [
+  ["Non-Existence", "NONE"],
+  ["Sub-Existential", "Infinitesimal"],
+  ["Physical (3D Existence)", "Universal"],
+  ["Spatiotemporal (4D Existence)", "Complex Universal"],
+  ["Multiversal (5D Existence)", "Multiversal"],
+  ["Higher-Dimensional Entity", "UNKNOWN"],
+  ["Conceptual Existence", "UNKNOWN"],
+  ["Abstract / Fundamental Existence", "UNKNOWN"],
+  ["Meta-Existential", "UNKNOWN"],
+  ["Narrative Existence", "Narrative Transcendent"],
+  ["Trans-Narrative", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const AUTHORITY_SCALE = [
+  ["No Authority", "NONE"],
+  ["Local Authority", "Human / Superhuman"],
+  ["Environmental Authority", "Urban / Tectonic"],
+  ["World Authority", "Planetary"],
+  ["Cosmic Authority", "Galactic / Universal"],
+  ["Spatiotemporal Authority", "Complex Universal"],
+  ["Multiversal Authority", "Multiversal"],
+  ["Dimensional Authority", "UNKNOWN"],
+  ["Conceptual Authority", "UNKNOWN"],
+  ["Archetypal Authority", "Archetypal"],
+  ["Narrative Authority", "Narrative Transcendent"],
+  ["Absolute Authority", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const NARRATIVE_POSITION_SCALE = [
+  ["Contained Narrative Entity", "UNKNOWN"],
+  ["Higher-Layer Observer", "UNKNOWN"],
+  ["Narrative-Aware Entity", "UNKNOWN"],
+  ["Narrative Manipulator", "Narrative Transcendent"],
+  ["Narrative Transcendent", "Narrative Transcendent"],
+  ["Absolute Narrative Position", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const EXISTENCE_TYPE_SCALE = [
+  ["Physical", "Universal"],
+  ["Spatiotemporal", "Complex Universal"],
+  ["Dimensional", "UNKNOWN"],
+  ["Virtual", "UNKNOWN"],
+  ["Energy-Based", "UNKNOWN"],
+  ["Conceptual", "UNKNOWN"],
+  ["Abstract", "UNKNOWN"],
+  ["Non-Existence", "UNKNOWN"],
+  ["Narrative", "Narrative Transcendent"],
+  ["Absolute", "Absolute Narrative Transcendent"],
+] satisfies StatValueTuple[];
+
+export const RESISTANCE_SCALE = [
+  ["Physical Resistance", "UNKNOWN"],
+  ["Energy Resistance", "UNKNOWN"],
+  ["Elemental Resistance", "UNKNOWN"],
+  ["Mental Resistance", "UNKNOWN"],
+  ["Illusion Resistance", "UNKNOWN"],
+  ["Soul Resistance", "UNKNOWN"],
+  ["Spiritual Resistance", "UNKNOWN"],
+  ["Time Resistance", "UNKNOWN"],
+  ["Space Resistance", "UNKNOWN"],
+  ["Gravity Resistance", "UNKNOWN"],
+  ["Reality Warping Resistance", "UNKNOWN"],
+  ["Conceptual Resistance", "UNKNOWN"],
+  ["Causality Resistance", "UNKNOWN"],
+  ["Fate Resistance", "UNKNOWN"],
+  ["Probability Resistance", "UNKNOWN"],
+  ["Existence Erasure Resistance", "UNKNOWN"],
+  ["Void Resistance", "UNKNOWN"],
+  ["Dimensional Resistance", "UNKNOWN"],
+  ["Narrative Resistance", "Narrative Transcendent"],
+  ["Authority Resistance", "UNKNOWN"],
+] satisfies StatValueTuple[];
+
+export const AGILITY_SCALE = SPEED_SCALE;
+
+type StatValueTuple = readonly [label: string, tier: string];
+
+export function valuesFromTuples(
+  tuples: readonly StatValueTuple[],
+): StatValueDefinition[] {
+  return tuples.map(([label, tier]) => ({
+    label,
+    tier,
+  }));
+}

@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum StatCategory {
+  physical
+  speed
+  sensory
+  intelligence
+  mental_social
+  combat
+  power_system
+  metaphysical
+  resistance
+}
+
+enum StatType {
+  progressive
+  cumulative
+}
+
+enum ValueMode {
+  tiering_system
+  unique_scale
+  non_tiered
+  contextual_unknown
+  custom
+}
+
+enum Importance {
+  Flavor
+  Minor
+  Secondary
+  Major
+  Core
+  Defining
+}
+
+enum ImportanceBehavior {
+  fixed
+  variable
+  per_value
+}
+
+enum TierSpecialValue {
+  NONE
+  UNKNOWN
+}
+
+enum StatDependencyRelation {
+  implies_minimum
+  supports
+  requires
+  does_not_imply
+  bypasses
+}
+
+model StatDefinition {
+  id                           String             @id
+  name                         String
+  category                     StatCategory
+  description                  String
+  type                         StatType
+  valueMode                    ValueMode
+  exclusive                    Boolean            @default(false)
+  importanceBehavior           ImportanceBehavior
+  recommendedDefaultImportance Importance?
+  recommendedImportanceRange   String?
+  usesTieringSystemValues      Boolean            @default(false)
+  usesCustomValues             Boolean            @default(false)
+  addedByImprovedSystem        Boolean            @default(false)
+  notes                        String?
+
+  values                       StatValueDefinition[]
+  dependenciesFrom             StatDependency[]   @relation("DependencySource")
+  dependenciesTo               StatDependency[]   @relation("DependencyTarget")
+
+  createdAt                    DateTime           @default(now())
+  updatedAt                    DateTime           @updatedAt
+
+  @@index([category])
+  @@index([type])
+  @@index([valueMode])
+}
+
+model StatValueDefinition {
+  id               String         @id @default(cuid())
+  statDefinitionId String
+  label            String
+  tier             String
+  description      String?
+  order            Int            @default(0)
+
+  statDefinition   StatDefinition @relation(fields: [statDefinitionId], references: [id], onDelete: Cascade)
+
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([statDefinitionId, label])
+  @@index([statDefinitionId])
+  @@index([tier])
+}
+
+model StatDependency {
+  id           String                   @id @default(cuid())
+
+  sourceStatId String
+  targetStatId String
+  relation     StatDependencyRelation
+  description  String
+
+  sourceStat   StatDefinition           @relation("DependencySource", fields: [sourceStatId], references: [id], onDelete: Cascade)
+  targetStat   StatDefinition           @relation("DependencyTarget", fields: [targetStatId], references: [id], onDelete: Cascade)
+
+  createdAt    DateTime                 @default(now())
+  updatedAt    DateTime                 @updatedAt
+
+  @@unique([sourceStatId, targetStatId, relation])
+  @@index([sourceStatId])
+  @@index([targetStatId])
+}
+
+model StatCategoryInfo {
+  id          StatCategory @id
+  label       String
+  description String
+  order       Int          @default(0)
+
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}

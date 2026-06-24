@@ -1,0 +1,16 @@
+services:
+  haliverse_postgres:
+    image: postgres:16-alpine
+    container_name: haliverse_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: haliverse
+      POSTGRES_PASSWORD: haliverse_password
+      POSTGRES_DB: haliverse_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - haliverse_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  haliverse_postgres_data:
